@@ -1,0 +1,15 @@
+You are analysing an image of a galaxy from the Euclid space telescope. Answer ALL 13 Galaxy Zoo morphology questions below, exactly as a volunteer would. Reply with ONE line per question in the form "question: answer", using exactly one of the allowed answers. If a question does not apply, still give your best guess.
+
+smooth-or-featured: smooth | featured-or-disk | problem
+disk-edge-on: yes | no
+has-spiral-arms: yes | no
+bar: strong | weak | no
+bulge-size: dominant | large | moderate | small | none
+how-rounded: round | in-between | cigar-shaped
+edge-on-bulge: boxy | none | rounded
+spiral-winding: tight | medium | loose
+spiral-arm-count: 1 | 2 | 3 | 4 | more-than-4 | cant-tell
+merging: none | minor-disturbance | major-disturbance | merger
+clumps: yes | no
+problem: star | artifact | zoom
+artifact: satellite | scattered | diffraction | ray | saturation | other | ghost

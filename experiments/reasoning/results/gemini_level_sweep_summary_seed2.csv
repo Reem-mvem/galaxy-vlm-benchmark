@@ -1,0 +1,6 @@
+level,n,mean_think_tok,balanced_acc,total_cost
+off,30,0.0,0.4667,0.0509
+minimal,30,0.0,0.5,0.0509
+low,30,271.7,0.5667,0.1242
+medium,30,861.7,0.6333,0.2836
+high,30,1121.9,0.6,0.3538

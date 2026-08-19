@@ -1,0 +1,67 @@
+Found 34 missing predictions out of 218 total
+Loaded 218 test examples
+label_name
+diffuse    96
+arm        73
+stream     43
+shell       6
+[1/34] test_4 (true=stream) -> pred=stream      
+[2/34] test_6 (true=diffuse) -> pred=shell       
+[3/34] test_8 (true=arm) -> pred=stream      
+[4/34] test_17 (true=stream) -> pred=shell       
+[5/34] test_20 (true=diffuse) -> pred=stream      
+[6/34] test_23 (true=stream) -> pred=shell       
+[7/34] test_27 (true=diffuse) -> pred=stream      
+[8/34] test_34 (true=arm) -> pred=None        
+[9/34] test_41 (true=diffuse) -> pred=shell       
+[10/34] test_61 (true=arm) -> pred=stream      
+[11/34] test_66 (true=stream) -> pred=shell       
+[12/34] test_70 (true=arm) -> pred=stream      
+[13/34] test_71 (true=diffuse) -> pred=shell       
+[14/34] test_73 (true=arm) -> pred=stream      
+[15/34] test_77 (true=diffuse) -> pred=stream      
+[16/34] test_78 (true=diffuse) -> pred=stream      
+[17/34] test_82 (true=shell) -> pred=shell       
+[18/34] test_104 (true=diffuse) -> pred=stream      
+[19/34] test_106 (true=arm) -> pred=stream      
+[20/34] test_137 (true=diffuse) -> pred=stream      
+[21/34] test_143 (true=diffuse) -> pred=stream      
+[22/34] test_153 (true=diffuse) -> pred=stream      
+[23/34] test_154 (true=stream) -> pred=stream      
+[24/34] test_155 (true=arm) -> pred=stream      
+[25/34] test_156 (true=diffuse) -> pred=shell       
+[26/34] test_163 (true=diffuse) -> pred=stream      
+[27/34] test_175 (true=arm) -> pred=stream      
+[28/34] test_177 (true=diffuse) -> pred=shell       
+[29/34] test_184 (true=diffuse) -> pred=shell       
+[30/34] test_188 (true=arm) -> pred=stream      
+[31/34] test_189 (true=stream) -> pred=shell       
+[32/34] test_194 (true=arm) -> pred=stream      
+[33/34] test_196 (true=arm) -> pred=stream      
+[34/34] test_214 (true=stream) -> pred=stream      
+
+Filled 34 predictions -> C:\Users\reem2\Desktop\geir-local\galaxy-vlm-benchmark\tasks\which_lsb\results\which_lsb_results_qwen.csv
+Token usage — in: 7,146  out: 86
+1 still missing after fill
+
+0 unparseable responses out of 217
+
+============================================================
+EVALUATION METRICS
+============================================================
+  Model:              qwen/qwen3.5-397b-a17b
+  Valid predictions:  217 / 217
+  Balanced Accuracy:  0.4128  (41.28%)
+
+              precision    recall  f1-score   support
+
+         arm       0.00      0.00      0.00        72
+      stream       0.19      0.65      0.29        43
+       shell       0.09      1.00      0.17         6
+     diffuse       0.00      0.00      0.00        96
+
+    accuracy                           0.16       217
+   macro avg       0.07      0.41      0.11       217
+weighted avg       0.04      0.16      0.06       217
+
+Saved confusion matrix -> C:\Users\reem2\Desktop\geir-local\galaxy-vlm-benchmark\tasks\which_lsb\results\which_lsb_results_qwen_confusion.png

@@ -1,0 +1,13 @@
+google-genai
+openai
+requests
+python-dotenv
+pandas
+numpy
+matplotlib
+scikit-learn
+datasets
+pillow
+# optional:
+# genai-prices   (cost estimates for Gemini runs)
+# jupyter        (analysis/label_efficiency.ipynb)

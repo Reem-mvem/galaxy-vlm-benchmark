@@ -1,0 +1,187 @@
+Found 158 missing predictions out of 863 total
+Loaded 863 test examples
+label_name
+not_tidal    589
+tidal        274
+[1/158] ab391fccb445c5112864414d7c77c2256d3e076f99886a77ed73cb79c45acdd9 (true=not_tidal) -> pred=None        
+[2/158] 541838e31c73ce4c951ca065f7a3a64eabe9c7825d328599e6b6b51879fbf278 (true=tidal) -> pred=None        
+[3/158] cd1a0ed56cad701d15a4ef03f2b69be464473ca5c4d4315166566fdf166067bf (true=not_tidal) -> pred=not_tidal   
+[4/158] 450db1ca4480baa95c43716a4619e76926bc1e920f520ac81ebed1a24d026d0d (true=not_tidal) -> pred=not_tidal   
+[5/158] fb2f1d1f7c6c0947751cc667cbfb83918bc8545348c98c28e1419d03112c6e3e (true=tidal) -> pred=tidal       
+[6/158] 3db3966213ab7bcea26e89dab62204dd59f8bd86e9a1335b65ca610ad23f7518 (true=tidal) -> pred=tidal       
+[7/158] e841dd19d4e1dbb513442a88da0daf6b7217a5608ff7ce6ee91f1a7388f3b35f (true=not_tidal) -> pred=not_tidal   
+[8/158] 0b7604f0d4d6412f1904dd8da98fac467b259d7a63fe46752b9619e03d828548 (true=not_tidal) -> pred=not_tidal   
+[9/158] feb752221602a7da82a9cdf5fd048f670b2b577d22f5d0060f200060bb37621a (true=tidal) -> pred=tidal       
+[10/158] f6f47a4efe6393e80f0cb9cfbaf78ab9c63e014a0ffc7e63175cb1cd51f2cfa7 (true=not_tidal) -> pred=not_tidal   
+[11/158] a9115fbb6cd519dd73e764a22c1c7682c32834a9fafe8616a647f5bb170f2879 (true=not_tidal) -> pred=not_tidal   
+[12/158] 3b970f88c6d65b9b68501c27e36d9790440e9b61c10cab2fc22e9a9f59d18215 (true=tidal) -> pred=None        
+[13/158] 66d68326d165f380cc6d452486153094743b4e93c122fda3d10e6183ad247484 (true=not_tidal) -> pred=not_tidal   
+[14/158] a9b2f32be3e460363b928cd5c18637047c412da8ffb986ef049d399ab5e881bc (true=not_tidal) -> pred=not_tidal   
+[15/158] 8d47238113eac75e7ae375dad39934f65779fc3ddb47a89a1c0d9daf918a85f6 (true=not_tidal) -> pred=not_tidal   
+[16/158] 822c2c018d849a3958829f4e764b53ced0e7303042f9374c1ce8ab10c3c90a52 (true=not_tidal) -> pred=not_tidal   
+[17/158] 914a5240bcfe4eefee37470eaf30704dd10c0d2176ee6d65be8a6df8ba00c0c0 (true=not_tidal) -> pred=not_tidal   
+[18/158] 908d3027983c6c9a89304626bc48f721607f3926480a5e5a40dc309efd441fb3 (true=not_tidal) -> pred=None        
+[19/158] 7877ce8b6aab44fb8b72a2baaa7f029f31418c3bd9434a851c1ab9e38567d276 (true=not_tidal) -> pred=not_tidal   
+[20/158] cceba1aaf8d8948cfbc0845f2d0f8102b85e2297b53d48cfb34ac485394fb242 (true=tidal) -> pred=tidal       
+[21/158] fda6af4f42622bccb0d9760e42e8d6a2256626a8ac4c6a243a280803996a89b0 (true=tidal) -> pred=tidal       
+[22/158] 5c297c15d9fda63735aed49c0772b09a766a1fd49e961a43063fcf1372794bb9 (true=not_tidal) -> pred=not_tidal   
+[23/158] 4925fec12bb1f9209d5168179e8e72f282de1372cabfc777e833a9728b20b851 (true=not_tidal) -> pred=not_tidal   
+[24/158] d63956362ef00cdc78513ffc983f8b1fef02f9ba4670818b6d3e86cfe18f5684 (true=not_tidal) -> pred=not_tidal   
+[25/158] 3a0c3ba8a9c80142a6b4fdc1a6f0d8c2f3c21c5906f6fc96688d824df026da61 (true=not_tidal) -> pred=not_tidal   
+[26/158] 534dc65ae702ff1f158cc0b7fd7d87b6a85f5818d87472388727084537bda91e (true=tidal) -> pred=tidal       
+[27/158] d39198435ddb04d2d62510dd9772f7b866e059955777dfe97dd54a2181f71685 (true=not_tidal) -> pred=not_tidal   
+[28/158] 742e0d76e76765ef377f8f548d4e1507c0bc67cbff417d6f6a8f7e6993c5e527 (true=not_tidal) -> pred=not_tidal   
+[29/158] bb6139f2e6a08bdbe55a8ec30509672c44672968bbc8746a41ac3e228f8d3818 (true=not_tidal) -> pred=not_tidal   
+[30/158] e2ffe492b5d54a41bd0a488a92ccb1c1c92206d2f3bb85194ccf8513af4e0ff8 (true=not_tidal) -> pred=None        
+[31/158] 2c156cb72fe33f2eb238450f92da6a4556986787dc4abd2d7c28bac82833296e (true=not_tidal) -> pred=not_tidal   
+[32/158] d4c8b83dc537cc9adf14ce7173e8112c37de8a818d5e0fff215616db549f4b64 (true=not_tidal) -> pred=not_tidal   
+[33/158] c9e0e543ffee9869b4c18b73e8f978d5bff2818d5ce2280d22034659d3bf56d5 (true=not_tidal) -> pred=None        
+[34/158] 42f59144fffab19783d28b21761d484812ae8a288be0514e1e6e271bd633af4a (true=not_tidal) -> pred=not_tidal   
+[35/158] c37bd385469556acb93137c4097d537bb7e346fa0b9187de73b3274a30c0127d (true=not_tidal) -> pred=not_tidal   
+[36/158] 5888e4a2618a363a3d94b3e19f3676305be5b709fedb93936fbdf5c094be41e2 (true=tidal) -> pred=None        
+[37/158] f360540df0b2c16c5a062c775d22d220fe2bdb7235b4305ec7b33e68d9a25806 (true=not_tidal) -> pred=None        
+[38/158] a2318c10cd738d1744d444fe03dfeab9b5cc1940511a0a812330206c1a3b5441 (true=not_tidal) -> pred=not_tidal   
+[39/158] 15edfb1d81d241d709f42ea9b515b68c6fec8a389935b674c199e3ca655780f8 (true=tidal) -> pred=tidal       
+[40/158] 6cb1989c94388d125a667a55023027c2cb3259daebf929e1bf40740c7693f6aa (true=not_tidal) -> pred=not_tidal   
+[41/158] d6db81099ce6fa02d6381cb3855b634272d3c95dbc73a7810d0f69d2cda5b2ea (true=tidal) -> pred=tidal       
+[42/158] 9fdae1599e43f53ef0d06e3d73169aefe719dd732cb036c9f446599cfa408d27 (true=tidal) -> pred=tidal       
+[43/158] e488752dfb71eccefa9e07e1daa8d96ce470f6ce68b08a4864f99fff1025976b (true=not_tidal) -> pred=not_tidal   
+[44/158] 115d91fe7bd5230c7d44f7502614f10ce8877ecbf67c617d79c41cd3479970be (true=not_tidal) -> pred=not_tidal   
+[45/158] 829114d3b35c48e3f62647bf22f9cf3fe9736eed1b3881b4042714908cff2889 (true=not_tidal) -> pred=not_tidal   
+[46/158] fc7d0569ec5b3def75bb97fe5167092ba500f5a7efcce57d81d23ca18f2e06e2 (true=not_tidal) -> pred=not_tidal   
+[47/158] 78e7764edd17e96e77ae6f85df7c69d077eba676091a203aa1a9ee47175afa35 (true=not_tidal) -> pred=None        
+[48/158] bc7ce58ab734744a6f4d41bd5e85b31ed1d743cf65968009ca06f5b620fa672f (true=tidal) -> pred=tidal       
+[49/158] 830867270189040b1e165374a49fbcfea42b5a9e3b6c8bee9491b5d3bc0aa4d7 (true=not_tidal) -> pred=None        
+[50/158] 4104a96319362c74796e0bd487bf2217b17e375cadf0b767725ec8dc0ab6025d (true=tidal) -> pred=not_tidal   
+[51/158] 1611c281bbc284a4b0ca1171ffc42a228df6a6eda0141caf85cc1601b3280810 (true=not_tidal) -> pred=tidal       
+[52/158] 627f9b3b93785d960d1882c76b20d2b373ed8096ab0c5381e6aea3d5d2d2e567 (true=not_tidal) -> pred=not_tidal   
+[53/158] 22a46f584dd800137642513bd68e2960245312ec5d932463591e3898b6b22e04 (true=tidal) -> pred=tidal       
+[54/158] 984aea35b549a746c98770116d22632fe34aca63f250805dd0fd718973894a96 (true=not_tidal) -> pred=not_tidal   
+[55/158] 7bd2303c122e55d0c881db1a4ee4e11c3bab40eb990d3feb48c9eaf99596dfa7 (true=not_tidal) -> pred=not_tidal   
+[56/158] 9bc978efc82a5cb77073a247224d34dfe1b61121ccc43c261b76025d6d626b4e (true=tidal) -> pred=tidal       
+[57/158] ea497668b224213b6ceb1b610aba8b0dd98e5aaf931538d34c03b8b260126d31 (true=not_tidal) -> pred=not_tidal   
+[58/158] c0ac9d07a2c19c3361c5c353346d66eca11a0357560a0cee5f7fc4d5e603bec8 (true=not_tidal) -> pred=not_tidal   
+[59/158] 62fdd69750d7a68f76e6722adb746fdb9357fb6950d9ed15803e7dc7514f6b50 (true=tidal) -> pred=tidal       
+[60/158] 04c1edcb5be2c2668755ef64b3c0120371cb4014a44c443bac08e0a1d414b5e0 (true=not_tidal) -> pred=not_tidal   
+[61/158] 4d8d2723b821de5f476f28638120b15305ef5b44a5a79c1f0ebf1943114dd1f7 (true=not_tidal) -> pred=not_tidal   
+[62/158] b0df0d566c5508260aa9e22bd89240277ff0d97e7f0e965e3b094b627a597d4d (true=tidal) -> pred=not_tidal   
+[63/158] 69575d74b305b1711377c1a6bb6897b37718330044868a01be0b8c1f4061f98a (true=not_tidal) -> pred=None        
+[64/158] d5acd90fbc4b0c0b41503c7e628a890a0cfb77c7fc703b1f801418adb175525b (true=not_tidal) -> pred=None        
+[65/158] dc7b86e148cd00bfa77c8d67d80f93882232fcc11e357d3268515d47dabe6053 (true=not_tidal) -> pred=not_tidal   
+[66/158] b9366771fda6e14b5bb83ea6f98536cd9e2bcbfb2a826a2864b5d3ca808b5091 (true=not_tidal) -> pred=not_tidal   
+[67/158] f4d25ea6178ffa4184a9caa58828bd6e5ebf62753820a7d6a9a15a196e3ff6a7 (true=not_tidal) -> pred=not_tidal   
+[68/158] d543dbdd7e4ffbcc6ab4b62ce2128d82d09daa6278bcd42a348c2fcae8dee833 (true=not_tidal) -> pred=not_tidal   
+[69/158] 0ed248dc43475ddf2cf19142754bb81f50249b239af71192bfbec3a5bac24e5e (true=not_tidal) -> pred=not_tidal   
+[70/158] a2c2afec03839cea498480fce66feb61a0140fbeafc135b2a2514e3e3b56e6a1 (true=not_tidal) -> pred=not_tidal   
+[71/158] abc9e3a51fde92fb27911ea545d9eb569e92c961faf12a7c7cc769f7fa7b4951 (true=not_tidal) -> pred=not_tidal   
+[72/158] 23d293ff7cc7e801dfd658e537e6fe412e841d36940cd54a07762fa447f581d4 (true=not_tidal) -> pred=not_tidal   
+[73/158] aa80e624e446729756d53277d565253a318e85db32c0d0cb94e0b1b584187e2f (true=not_tidal) -> pred=None        
+[74/158] ee77b4dc76572132daddc375c1bf42b5d0832b54acff52f31b68293041a9f959 (true=not_tidal) -> pred=not_tidal   
+[75/158] 83f7811b21bd35d2fc929d345c7e325f4c85a11fc7c6dba070e0124d6800c115 (true=tidal) -> pred=tidal       
+[76/158] a6d643c9a4072606891288a705c57bb1b17b11a167b569fe6d9b87a4286cac01 (true=not_tidal) -> pred=not_tidal   
+[77/158] f0360a880cfa714de00c76e728a4ccbdb2aaac5987924a1402e78279e29a5a24 (true=tidal) -> pred=None        
+[78/158] 830067d4c44f272696cabc4a56d5333236df11629bad2488204530e2a856a863 (true=not_tidal) -> pred=not_tidal   
+[79/158] 97d25c9c230e783a622010edf03b4100d4b65d14a1814764a2fd32247186bd79 (true=not_tidal) -> pred=not_tidal   
+[80/158] bc76fadccf07c2c7d44d70382bba7e114a34a31338c5e6b2dc27ec092d4ed9a0 (true=not_tidal) -> pred=None        
+[81/158] 67eb2ba96d9b5f81918e6351133cea9bb99390b7e33997cf1d27306d2db19fea (true=not_tidal) -> pred=not_tidal   
+[82/158] 1d4c0559bf76250fb54445249f4e3506d9bac0efeea52a3f71b72da780c0e584 (true=not_tidal) -> pred=not_tidal   
+[83/158] 57d39147dc985757a1d2a83a56ad2802a4d5a50b3c342179b1d678ceac7591ab (true=not_tidal) -> pred=not_tidal   
+[84/158] 77b43f5adde0c8b0bdd7bceaf512bb787f7743cd43de6202c0d53a18e0aa3002 (true=not_tidal) -> pred=not_tidal   
+[85/158] 95898c199917d324f01885960d7ad6960faec9ab81862312e4ad7cdcbaf69375 (true=tidal) -> pred=not_tidal   
+[86/158] c5e730fe6b3c013ff8c1ae52b531b24b7bce8bba0c593d07043e224aa4b37f0c (true=not_tidal) -> pred=None        
+[87/158] cb6af7a42cde5f3ac9b5e046df41d80ff66d89f595de22789b788a491d70f591 (true=not_tidal) -> pred=None        
+[88/158] 5582fc49088e4c60beda65cb6f68f9f241876fbc44b42219ffe3ad8d38232815 (true=not_tidal) -> pred=not_tidal   
+[89/158] 298eff8feecadf4370b23b7798c80c81d7136a8bc317ebcc8148157666e643c6 (true=tidal) -> pred=tidal       
+[90/158] fd70b32ed4bee1d5ce267e24afbb9ce6086d90a6ef69be31507eeb36e0e92e90 (true=tidal) -> pred=tidal       
+[91/158] 385f145c742a9d82ab00ee78fc463439bb0c07b1135217c155a058c604a9bc8e (true=tidal) -> pred=tidal       
+[92/158] 6991f85d11e1766ab41dd45930671bf4338702458c1baccc9d277fbbcc96a966 (true=not_tidal) -> pred=None        
+[93/158] 5148a34ce6ee46428d3212dd792722162b6057b1e5dc64e46ce4307692daf68d (true=not_tidal) -> pred=not_tidal   
+[94/158] 1d5838c2e6a11c3721247bec4f993771775cf65cf3df77814f4b3bd714a64ee8 (true=not_tidal) -> pred=not_tidal   
+[95/158] c45dc544148d2b8feece5276dc25abae6d33e2a2ca3aa96d64ffdde167a19e7b (true=not_tidal) -> pred=None        
+[96/158] ac4406e9d1418948048b0d095d53fb0c47c934cf3dbbda5b9c9ab9a910abe668 (true=not_tidal) -> pred=not_tidal   
+[97/158] af6febd4fad49af210196b9c30631b9f428f1cd04dc2a9735749fbd81ce1b1d4 (true=not_tidal) -> pred=not_tidal   
+[98/158] be991e7b8c90f80a5b45405ad83f8c30f59cee036a7f7db6d1f49992034a565e (true=not_tidal) -> pred=not_tidal   
+[99/158] 785eae8b37ae6a3060fb75bbb4956ec3abd622d6fc55083b771dfd87fb56bcdd (true=not_tidal) -> pred=not_tidal   
+[100/158] fc4bb15d59f92d3ea64742ee6e30ad32162da36cc06315aee459f66d1acc7cbb (true=not_tidal) -> pred=None        
+[101/158] 9c86f2ba8f911e1367ecdc32b5a56f58d39be7bd4a3e48baecf1ccd9c7a97c52 (true=not_tidal) -> pred=None        
+[102/158] 44ca96141fa5a2bfc4ba396baf67bdef1980d4372840be8839168ddf35ec684c (true=not_tidal) -> pred=not_tidal   
+[103/158] d8048629dd38ef71a23e508de845ace803c72c16e2bdcd08116e6cf134484ab5 (true=tidal) -> pred=not_tidal   
+[104/158] 2c001ed20e5149be02ea177cd955c571c47465f34245ee9079d699391533292d (true=tidal) -> pred=None        
+[105/158] da7cc3bfa2595735eb268edbdce4a12fe0a3d50681b68e7049478448dc572c67 (true=not_tidal) -> pred=not_tidal   
+[106/158] 2fa8ef9e3a57d28deb3b5ae9e394d989ce1d29e774296c14ad4747525aeb94da (true=not_tidal) -> pred=not_tidal   
+[107/158] 68ca963637a8c79b2bab6452941aa2a72cf991cd036592ae6b20aad9c1493ede (true=tidal) -> pred=tidal       
+[108/158] d9e99c979ee4c246c368dba1b7a8866d534096d1c09a92ad454fcfc8b7d7fac5 (true=not_tidal) -> pred=not_tidal   
+[109/158] a283ffb52db5cbb0dd9d7436bc2f2b03a259b670f8548879829abe0c5197216a (true=not_tidal) -> pred=not_tidal   
+[110/158] 15982d30fe2e0c8e003952a4c7a14a4b43bff668559d05367e659a461456009f (true=not_tidal) -> pred=not_tidal   
+[111/158] 204c57406330ca137b77a367e64b6012667f711a37b4784b3c48e4ec58ae2543 (true=tidal) -> pred=tidal       
+[112/158] abd12c32118fb259695815c3772bdcf0c82ad31506e59224b352bae1643e733f (true=not_tidal) -> pred=not_tidal   
+[113/158] 987157fd8bb747e1da9d377924085ed73af9e49a2984eaf7c58394d8a6afcf94 (true=tidal) -> pred=tidal       
+[114/158] 1a68627408b4e84e644fda360901ad6db29087c37868e039cb071080b3b4572a (true=not_tidal) -> pred=not_tidal   
+[115/158] 16c199989bd391952f5940ef18128cf55d0377c3f9bfd7db519d5bf156b6b26b (true=not_tidal) -> pred=not_tidal   
+[116/158] 165abd0c2971aa4caa7ad3094ad4a59d1584532605b93e9fc6a97771d4bd8b57 (true=not_tidal) -> pred=not_tidal   
+[117/158] 0735987bc46a0ef0b032ef9298ec273181bf3f018fa6ceadb449dc96476482c0 (true=not_tidal) -> pred=not_tidal   
+[118/158] ee9c15ae02b5c066b5ad845938740429a414a744e5791b3d81698342ebcd2e02 (true=not_tidal) -> pred=None        
+[119/158] ea2066ff9093453a17aec5170d08eef17683590ba6e7b9bff91470eb139e29ec (true=tidal) -> pred=tidal       
+[120/158] 75128dcdd2bc1ae0b518ba5d11536125892a95bfadbe1269a14ca591ed73c330 (true=not_tidal) -> pred=tidal       
+[121/158] d4803d3b3f99316ec80c1991e76456141853b9a0ae797497fbe347e2add7ed53 (true=tidal) -> pred=tidal       
+[122/158] 63b758157aa2ec6411b42d9169e34092ed8fe6250e425f3c3dd353c6ace2c75e (true=not_tidal) -> pred=not_tidal   
+[123/158] 5b7af0c3ea6a7429ae6d999aea6cd632e5c6a050409860c338bb0e98e14cf5d2 (true=not_tidal) -> pred=not_tidal   
+[124/158] d4e3d25c12051821833cd1b94d1eb3ff520118871ce36844d12d7921a65394fa (true=not_tidal) -> pred=not_tidal   
+[125/158] 8fbfed7e1da56406982eea1d5e729b296e753d5843f4eae49578d48fa3082fe7 (true=not_tidal) -> pred=None        
+[126/158] 6b076c7ed49ea60b95d4fe5af07a7352b1c989f383dd4588852c27e58d878a32 (true=not_tidal) -> pred=not_tidal   
+[127/158] 53c1855f6a30d931acb9e4153e80539e5bf01448986fbbd225321ee96ffceea3 (true=not_tidal) -> pred=not_tidal   
+[128/158] daf6298247464fe86a52fd663a048fe7b57adfa7af6be72e581d2b4046061177 (true=not_tidal) -> pred=not_tidal   
+[129/158] f54a7b09ae6c273fa487a6bcf48e6cd75820be8b132d42d6378521500aac4004 (true=not_tidal) -> pred=not_tidal   
+[130/158] 356eadc4e0ccc30e1f58b27bc3092e6bc884f521821f8dc623a6000c8bce27a3 (true=tidal) -> pred=tidal       
+[131/158] 58e30c14ebf368e8987fad9db84f77ffd15eb8b3401749dd255b6981d9d948bc (true=tidal) -> pred=not_tidal   
+[132/158] 0cf6b05e1b6574ffbe90ba3caaf21328af0f718733b042aec1103df57c79d6a7 (true=tidal) -> pred=None        
+[133/158] 7ef5bbcfde6b2e9e65f378b1a35b3d1d57053c3f4891a87f433bfa44ed2062dc (true=tidal) -> pred=None        
+[134/158] b68b6980d5f7b24d60486eea4958e74136dd269d670d91e37d457aba37439aa1 (true=tidal) -> pred=tidal       
+[135/158] 4f9ee0b9e4a59599fb080d61a70174a66c8c7821869e1bb19d3a60123337ba17 (true=not_tidal) -> pred=None        
+[136/158] 64296658e6ea55ad0498c6f46c7f048bf6ea2e57fc0a89ae9e41a96f94830b12 (true=not_tidal) -> pred=not_tidal   
+[137/158] f2ac2d22c8c057a2568794b2b1661ad15a222ea7c453d8c5e03ac1527e26ea62 (true=tidal) -> pred=not_tidal   
+[138/158] 54344acaee6a4b7bfe4cd4e0043b82753115f40d04202fef45e970590d30434a (true=not_tidal) -> pred=not_tidal   
+[139/158] cd373a4456d20dbd6a7221996519a97ad671119aa57c7338e48cf0ee6fd222e0 (true=not_tidal) -> pred=not_tidal   
+[140/158] e3c801b9949017ffeaaf8254f428653a0761f9c5e7f907eebc5afc9d54af3872 (true=not_tidal) -> pred=not_tidal   
+[141/158] 2e09515b520c076b071e60a974fe667d091c814c1efa011da6d4aaf7eb0b1274 (true=not_tidal) -> pred=not_tidal   
+[142/158] 5b7183b2f2b3f2535195decb905f570a42d5988c607d0ef64551fd7c33c2dc36 (true=tidal) -> pred=None        
+[143/158] 355b81f32f951851f1e0a162a382f1a1d869d7bce0711e865d2c4725bb942f25 (true=tidal) -> pred=not_tidal   
+[144/158] d320bfb48f8fdd4db55130c70a9ed74c19b041e17d1303bec83a1da687e492ff (true=not_tidal) -> pred=not_tidal   
+[145/158] b79503c8604375061a25001bb91813093b459cc89109da461b6b7dbbd3333793 (true=not_tidal) -> pred=not_tidal   
+[146/158] a649624005bf978a68a281dfc0e635aecadca2587d8ace44f93cd40a3c7f3e17 (true=tidal) -> pred=None        
+[147/158] ae0df5eceb5702fa29aa41e91639aec0b5632ce08a4db4d2d0e6c6b983b5b3a0 (true=not_tidal) -> pred=not_tidal   
+[148/158] 69394a5f855981eefd7a1bd01613f76160cc47967ecc821c68353308039ada53 (true=tidal) -> pred=None        
+[149/158] ad995566f6fcadcac1e002b165f9ee13ee9dab3d9aeb94acea9f03b64cce2df8 (true=tidal) -> pred=tidal       
+[150/158] e18225fc18d985126b696fbbeb847d0664353d56f4b4839cbc35b961618f6964 (true=not_tidal) -> pred=not_tidal   
+[151/158] ce47e544861a264d09a45a88944ce6b6def97aa99e8ac22ce66039b67f2f0126 (true=not_tidal) -> pred=None        
+[152/158] 2620c5cb2a7a7275c3f7d8e83f911e425861b4e353e6a03e9027f1b40467a601 (true=not_tidal) -> pred=None        
+[153/158] 7614df5db9613da1b8363c83b9de7036dd2c96392b3079dd6f6e38e11876df30 (true=tidal) -> pred=tidal       
+[154/158] 73da812d3da98d093f23881f9155f68f23ef117d34e6494bf25d4cd99c0c5ecf (true=not_tidal) -> pred=not_tidal   
+[155/158] bfee5e1c93b92996e0c6c9594dfe97d0c0c1dfbde1ee72a5c34173c29a84f83e (true=not_tidal) -> pred=not_tidal   
+[156/158] b4ddaa66cfeacc25d47682f664cdb556b4ae69af72a909af2a297f6f501dbd14 (true=not_tidal) -> pred=not_tidal   
+[157/158] 18ebf1ec69e2128c1e836a4dee0eeef962366f737182cbe0c8bf2a64439e54f0 (true=not_tidal) -> pred=not_tidal   
+[158/158] 811d5bdcfb3618471b0720c2205d7bb0235855cc6cc6234cb456570ba3e42491 (true=not_tidal) -> pred=not_tidal   
+
+Filled 158 predictions -> C:\Users\reem2\Desktop\geir-local\galaxy-vlm-benchmark\tasks\is_lsb\results\is_lsb_results_qwen.csv
+Token usage — in: 33,445  out: 892
+32 still missing after fill
+
+0 unparseable responses out of 831
+
+============================================================
+EVALUATION METRICS
+============================================================
+  Model:              qwen/qwen3.5-397b-a17b
+  Valid predictions:  831 / 831
+  Balanced Accuracy:  0.8416  (84.16%)
+
+              precision    recall  f1-score   support
+
+   not_tidal       0.88      0.98      0.93       567
+       tidal       0.95      0.70      0.81       264
+
+    accuracy                           0.89       831
+   macro avg       0.91      0.84      0.87       831
+weighted avg       0.90      0.89      0.89       831
+
+Saved confusion matrix -> C:\Users\reem2\Desktop\geir-local\galaxy-vlm-benchmark\tasks\is_lsb\results\is_lsb_results_qwen_confusion.png

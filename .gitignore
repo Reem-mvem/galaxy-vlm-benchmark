@@ -1,0 +1,35 @@
+# secrets — never commit API keys
+.env
+*.env
+!.env.example
+
+# downloaded data (rebuilt by eval_*.py --build_catalog_only)
+tasks/*/data/
+prompt_optimization/*/images/
+
+# CNN prediction bundles from the lab server (too large / external)
+gz_evo_downstream_predictions_bundle*/
+lightning_logs/
+
+# review staging & local-only verification (never pushed)
+unsorted/
+reported.md
+
+# large model artifacts kept off-git (retrain from finetuning/ + recipe)
+adapters/
+*.tar
+*.ckpt
+*.pt
+*.safetensors
+*.bin
+
+# train/validation CNN predictions are huge & not needed to verify test numbers
+# (test predictions ARE committed under finetuning/cnn/results/)
+**/predictions_train.csv
+**/predictions_validation.csv
+
+# python
+__pycache__/
+*.pyc
+*.egg-info/
+.ipynb_checkpoints/

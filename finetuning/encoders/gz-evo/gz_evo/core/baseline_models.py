@@ -1,0 +1,458 @@
+import logging
+
+import torch
+import torchmetrics
+import lightning as L
+import timm
+from timm.optim import create_optimizer_v2
+import pandas as pd
+
+from gz_evo.core import baseline_datamodules
+
+class GenericBaseline(L.LightningModule):
+    """
+    Generic supervised model, based on Zoobot. Intended to be subclassed.
+    """
+
+    def __init__(
+        self,
+        label_cols=['label'],
+        # encoder args
+        architecture_name: str = 'convnext_nano',
+        timm_kwargs = {},
+        channels: int = 3,
+        # training/finetuning args
+        learning_rate: float = 1e-4,
+        weight_decay: float = 0.05,
+        layer_decay: float = 0.75,  # new
+        from_scratch: bool = False, # override the above
+        # args for the head
+        head_kwargs = {},
+        ):
+
+        super().__init__()
+        
+        self.label_cols = label_cols
+
+        self.head_kwargs = head_kwargs
+        self.timm_kwargs = timm_kwargs
+        self.save_hyperparameters()  # saves all args by default
+    
+        self.encoder = timm.create_model(architecture_name, in_chans=channels, num_classes=0, **timm_kwargs)
+        logging.debug(f'Encoder created: {self.encoder}')
+
+        # test with dummy input
+        # dummy_input = torch.randn(1, channels, 224, 224)
+        # x_sanity = self.encoder(dummy_input)
+        # assert not torch.isnan(x_sanity).any(), "Encoder output contains NaNs before training, on sanity check"
+
+        self.head = self.create_head()
+
+        self.learning_rate = learning_rate
+        self.weight_decay = weight_decay
+        self.layer_decay = layer_decay
+        self.from_scratch = from_scratch
+
+        self.setup_metrics()
+
+
+    def setup_metrics(self, nan_strategy='error'):  # may sometimes want to ignore nan even in main metrics
+
+        self.loss_metrics = torch.nn.ModuleDict({
+            'train/supervised_loss': torchmetrics.MeanMetric(nan_strategy=nan_strategy),
+            'validation/supervised_loss': torchmetrics.MeanMetric(nan_strategy=nan_strategy),
+            'test/supervised_loss': torchmetrics.MeanMetric(nan_strategy=nan_strategy),
+        })
+
+        self.setup_other_metrics()
+
+    # simple option for baselines, designed for training from scratch
+    # def configure_optimizers(self):
+    #     # reliable simple option for baselines, you may want to subclass this
+    #      return torch.optim.AdamW(
+    #         self.parameters(),
+    #         lr=self.learning_rate,
+    #         weight_decay=self.weight_decay
+    #     )  
+
+    # copied from Zoobot - plausible that finetuning for core datasets will be important
+    def configure_optimizers(self):  
+
+        logging.info(f'Encoder architecture to finetune: {type(self.encoder)}')
+        if hasattr(self.encoder, 'vit'):  # e.g. mae
+            logging.info('Encoder has vit attribute, assuming this is the actual encoder')
+            model_to_optimize = self.encoder.vit
+        else:
+            model_to_optimize = self.encoder
+
+        if hasattr(model_to_optimize, 'pos_embed'):
+            logging.info("Encoder has pos_embed, will not train it")
+            model_to_optimize.pos_embed.requires_grad_(False)  # don't train pos_embed - typically, not a learnable parameter, despite timm defaults?
+
+        optimizer = create_optimizer_v2(
+            model_to_optimize,
+            opt='adamw',
+            lr=self.learning_rate,
+            weight_decay=self.weight_decay,
+            layer_decay= self.layer_decay
+        )
+
+        # add head parameters to optimizer
+        optimizer.add_param_group({'params': self.head.parameters(), 'lr': self.learning_rate})
+        logging.info("Learning rate scheduler not used")
+        logging.info("Manually applying lr_scale to optimizer param groups (because timm scheduler normally does this, but there is no scheduler)")
+        for group in optimizer.param_groups:
+            group['lr_scale'] = group.get('lr_scale', 1.0)
+            group['lr'] *= group['lr_scale']
+
+
+        # for debugging - simplified version
+        # optimizer = torch.optim.SGD(params=self.head.parameters(), lr=1e-4, weight_decay=0.)
+
+
+        logging.info("Optimizer ready")
+
+        return optimizer
+        
+    def forward(self, x):
+        #assert no nans
+        # assert not torch.isnan(x).any(), "Input tensor contains NaNs"
+        assert x.shape[1] < 4  # torchlike BCHW
+        x = self.encoder(x)
+        # assert not torch.isnan(x).any(), "Encoded tensor contains NaNs"
+        x = self.head(x)
+        # assert not torch.isnan(x).any(), "Head prediction tensor contains NaNs"
+        return x
+    
+    def make_step(self, batch, step_name):
+        x = batch['image']
+
+        labels = {key: batch[key] for key in self.label_cols}  # here is (not needed) label_col filter
+        # e.g. {'smooth_yes: 12, 'smooth_no': 8, 'smooth_fraction': 0.6, ...}
+        predictions = self(x)
+        loss = self.calculate_loss_and_update_loss_metrics(predictions, labels, step_name)      
+        outputs = {'loss': loss, 'prediction': predictions, 'label': labels}  # loss reduced. Fractions used for MSE metrics.
+        self.update_other_metrics(outputs, step_name=step_name)
+        return outputs
+
+    def training_step(self, batch, batch_idx):
+        return self.make_step(batch, step_name='train')
+
+    def validation_step(self, batch, batch_idx):
+        return self.make_step(batch, step_name='validation')
+    
+    def test_step(self, batch, batch_idx):
+        return self.make_step(batch, step_name='test')
+
+    def on_train_epoch_end(self) -> None:
+        logging.debug('on_train_epoch_end called')
+        # called *after* on_validation_epoch_end, confusingly
+        # do NOT log_all_metrics here. 
+        # logging a metric resets it, and on_validation_epoch_end just logged and reset everything, so you will only log nans
+        self.log_all_metrics(split='train')
+
+    # def on_validation_epoch_start(self):
+        # logging.info('on_validation_epoch_start called')
+
+
+    def on_validation_batch_start(self, batch, batch_idx, dataloader_idx = 0):
+        # logging.info('on_validation_batch_start called')
+        return super().on_validation_batch_start(batch, batch_idx, dataloader_idx)
+
+    def on_validation_epoch_end(self) -> None:
+        logging.debug('on_validation_epoch_end called')
+        self.log_all_metrics(split='validation')
+
+    def on_test_epoch_end(self) -> None:
+        self.log_all_metrics(split='test')
+
+    def predict_step(self, batch, batch_idx, dataloader_idx=0):
+        raise NotImplementedError('predict_step must be subclassed')
+    
+    # subclassed below for the various tasks, or extend yourself
+
+    def calculate_loss_and_update_loss_metrics(self, predictions, labels, step_name):
+        raise NotImplementedError('Must be subclassed')
+    
+    def setup_other_metrics(self):
+        raise NotImplementedError('Must be subclassed')
+    
+    def update_other_metrics(self, outputs, step_name):
+        raise NotImplementedError('Must be subclassed')
+    
+    def log_all_metrics(self, split):
+        raise NotImplementedError('Must be subclassed')
+    
+    def create_head(self):
+        raise NotImplementedError('Must be subclassed')
+
+
+class ClassificationBaseline(GenericBaseline):
+            
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # use multi-class cross entropy as loss function
+        self.loss_fn = torch.nn.CrossEntropyLoss(reduction='mean')  # reduces to scalar
+        self.num_classes = kwargs['head_kwargs']['num_classes']
+
+    def setup_other_metrics(self):
+        self.accuracy_metrics = torch.nn.ModuleDict({
+            'train/supervised_accuracy': torchmetrics.Accuracy(task='multiclass', num_classes=self.head_kwargs['num_classes']),
+            'validation/supervised_accuracy': torchmetrics.Accuracy(task='multiclass', num_classes=self.head_kwargs['num_classes']),
+            'test/supervised_accuracy': torchmetrics.Accuracy(task='multiclass', num_classes=self.head_kwargs['num_classes'])
+        })
+
+        
+    def calculate_loss_and_update_loss_metrics(self, predictions, labels, step_name):
+        loss = self.loss_fn(predictions, labels['label'])  # expects predictions and labels to be cross-entropy ready e.g. one-hot labels
+        self.loss_metrics[f'{step_name}/supervised_loss'](loss)
+        return loss
+    
+    def update_other_metrics(self, outputs, step_name):
+        self.accuracy_metrics[f'{step_name}/supervised_accuracy'](outputs['prediction'], outputs['label']['label'])
+
+    def log_all_metrics(self, split):
+        assert split is not None
+        for metric_collection in (self.loss_metrics, self.accuracy_metrics):
+            # prog_bar = metric_collection == self.loss_metrics
+            prog_bar = True
+            for name, metric in metric_collection.items():
+                if split in name:
+                    # logging.info(name)
+                    self.log(name, metric, on_epoch=True, on_step=False, prog_bar=prog_bar, logger=True)
+
+
+
+    def predict_step(self, batch, batch_idx, dataloader_idx=0):
+        preds =  self(batch['image'])
+        # TODO semi-lazy hardcoding for the moment
+        header = baseline_datamodules.LABEL_ORDER
+        df = pd.DataFrame(preds.cpu().numpy(), columns=header)
+        df['id_str'] = batch['id_str']  # str, no need to cast
+        return df
+
+
+    def create_head(self):
+        return torch.nn.Sequential(
+            # TODO global pooling layer?
+            torch.nn.Dropout(self.head_kwargs['dropout_rate']),
+            torch.nn.Linear(self.encoder.num_features, self.head_kwargs['num_classes']), 
+            torch.nn.Softmax(dim=-1)
+        )
+        
+
+
+"""
+question_answer_pairs example
+{
+    'smooth-or-featured-gz2': ['_smooth', '_featured-or-disk', '_artifact'],
+    'disk-edge-on-gz2': ['_yes', '_no'],
+    'has-spiral-arms-gz2': ['_yes', '_no']
+    ...
+}
+"""
+
+
+class RegressionBaseline(GenericBaseline):
+            
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # use multi-class cross entropy as loss function
+        self.question_answer_pairs = kwargs['head_kwargs']['question_answer_pairs']
+
+        # copied from Zoobot
+        # simple class to iterate through questions and answers and calculate a loss 
+        self.loss_fn = CustomMultiQuestionLoss(
+            question_answer_pairs=self.question_answer_pairs,  # set of questions and answers
+            question_functional_loss=get_neg_multinomial_log_prob  # apply to each question
+        )
+        
+        self.answer_keys = [q + a for q, a_list in self.question_answer_pairs.items() for a in a_list]
+        self.answer_fraction_keys = [q + a + '_fraction' for q, a_list in self.question_answer_pairs.items() for a in a_list]
+
+
+    def setup_other_metrics(self):
+        # without weighting, supervised loss (above) is the sum of the mean squared errors across all answers
+        # also have manually-calculated MSE across all answers?
+
+        # minor duplication: we run this during super().__init__, before own init, 
+        # so can't use self.answer_fraction_keys or even self.question_answer_pairs yet, only self.label_cols
+        answer_fraction_keys = [col for col in self.label_cols if col.endswith('_fraction')]
+        assert answer_fraction_keys, 'No answer fraction keys found in label_cols: {}'.format(self.label_cols)
+        # logging.info('metrics for answer fractions: {}'.format(answer_fraction_keys))
+
+        regression_metrics = {
+            'train/supervised_total_unweighted_mse': torchmetrics.MeanMetric(nan_strategy='ignore'),  # ignore nans via MeanMetric
+            'validation/supervised_total_unweighted_mse': torchmetrics.MeanMetric(nan_strategy='ignore'),
+            'test/supervised_total_unweighted_mse': torchmetrics.MeanMetric(nan_strategy='ignore')
+        }
+        for answer_col in answer_fraction_keys:
+            regression_metrics[f'train/supervised_unweighted_mse_{answer_col}'] = torchmetrics.MeanMetric(nan_strategy='ignore')
+            regression_metrics[f'validation/supervised_unweighted_mse_{answer_col}'] = torchmetrics.MeanMetric(nan_strategy='ignore')
+            regression_metrics[f'test/supervised_unweighted_mse_{answer_col}'] = torchmetrics.MeanMetric(nan_strategy='ignore')
+
+        self.regression_metrics = torch.nn.ModuleDict(regression_metrics)
+
+        
+    def calculate_loss_and_update_loss_metrics(self, predictions, labels, step_name):
+        loss = self.loss_fn(predictions, labels)  # expects predictions and labels to be cross-entropy ready e.g. one-hot labels
+        reduced_loss = torch.nanmean(torch.sum(loss, dim=1))  # sum across questions, then mean across batch
+        self.loss_metrics[f'{step_name}/supervised_loss'](reduced_loss)
+        return reduced_loss  # wasn't previously reduced
+    
+    def update_other_metrics(self, outputs, step_name):
+        predictions = outputs['prediction']
+        targets = torch.stack([outputs['label'][answer_col] for answer_col in self.answer_fraction_keys], dim=1)
+        self.regression_metrics[f'{step_name}/supervised_total_unweighted_mse'](
+            # mean squared error, summed across answers, then averaged by MeanMetric
+            torch.sum(torch.abs(predictions - targets) ** 2, dim=1)  
+        )
+
+        for answer_col in self.answer_fraction_keys:
+            answer_index = self.answer_fraction_keys.index(answer_col)
+            self.regression_metrics[f'{step_name}/supervised_unweighted_mse_{answer_col}'](
+                # mean squared error, for one answer, averaged by MeanMetric
+                torch.abs(predictions[:, answer_index] - outputs['label'][answer_col]) ** 2
+            )
+
+
+    def log_all_metrics(self, split):
+        logging.debug(f'Logging all metrics for split: {split}')
+        assert split is not None
+        for metric_collection in (self.loss_metrics, self.regression_metrics):
+            prog_bar = metric_collection == self.loss_metrics  # prog bar should only show losses
+            for name, metric in metric_collection.items():
+                if split in name:
+                    # logging.debug(f'logging {name}')
+                    self.log(name, metric, on_epoch=True, on_step=False, prog_bar=prog_bar, logger=True)
+
+
+    def predict_step(self, batch, batch_idx, dataloader_idx=0):
+        # print(batch)
+        # print(batch['image'].shape)
+        preds =  self(batch['image'])
+        header = self.answer_keys
+        df = pd.DataFrame(preds.cpu().numpy(), columns=header)
+        df['id_str'] = batch['id_str']  # str, no need to cast
+        return df
+
+
+    def create_head(self):
+        num_features = self.encoder.num_features
+        question_answer_pairs = self.head_kwargs['question_answer_pairs']
+        return SoftmaxHeadPerAnswer(num_features, question_answer_pairs, dropout_rate=self.head_kwargs['dropout_rate'])
+
+class SoftmaxHeadPerAnswer(torch.nn.Module):
+
+    def __init__(self, num_features: int, question_answer_pairs: dict, dropout_rate: float = 0.5):  # dropout newly added
+        super().__init__()
+
+        self.question_answer_pairs = question_answer_pairs
+        # Q heads, each one making softmax predictions for the answers to a question
+        self.heads = torch.nn.ModuleDict({
+            question: SoftmaxHead(num_features, len(answers), dropout_rate) for question, answers in question_answer_pairs.items()
+        })
+
+    def forward(self, x):
+        preds = [head(x) for head in self.heads.values()]
+        return torch.cat(preds, dim=1)
+    
+
+def SoftmaxHead(num_features, num_answers, dropout_rate):
+    return torch.nn.Sequential(
+            torch.nn.Dropout(dropout_rate),  # newly added
+            torch.nn.Linear(num_features, num_answers), 
+            torch.nn.Softmax(dim=1)  # this is our estimated probability for each answer (for multinomial loss)
+        )
+
+
+# used for GZ-Evo paper
+def get_neg_multinomial_log_prob(probs, counts):
+        
+        # negative log likelihood of observed counts using multinomial p predicted by model
+        # this is a simplified version of the Dirichlet-Multinomial loss from Zoobot etc, where the model predicts concentrations
+        # here, assumes the model predicts the probabilities of each answer without a dirichlet distribution, like W+2022
+        
+        # official version is
+        # return -1 * torch.distributions.multinomial.Multinomial(probs=probs).log_prob(counts)
+        # but imhomogenous total counts and typing both cause me more hassle than just copy/pasting the guts below
+
+        logits = torch.distributions.utils.probs_to_logits(probs)
+        log_factorial_n = torch.lgamma(counts.sum(-1) + 1)
+        log_factorial_xs = torch.lgamma(counts + 1).sum(-1)
+        logits[(counts == 0) & (logits == -torch.inf)] = 0
+        log_powers = (logits * counts).sum(-1)
+        log_prob = log_factorial_n - log_factorial_xs + log_powers  # previously missing an important set of brackets
+        return -1 * log_prob
+
+
+
+# copied from Zoobot to ensure reproducibility
+class CustomMultiQuestionLoss(torch.nn.Module):
+    def __init__(self, question_answer_pairs, question_functional_loss, careful=False):
+        super().__init__()
+        self.question_answer_pairs = question_answer_pairs
+        self.question_functional_loss = question_functional_loss
+        # looks similar to the RegressionBaseline init, but this is a different self
+        self.answer_keys = [q + a for q, a_list in self.question_answer_pairs.items() for a in a_list]
+        logging.info(f'answer keys: {self.answer_keys}')
+
+        self.careful = careful
+
+
+    def forward(self, inputs, targets):
+        # inputs, prediction vector, is B x N, where N is the number of answer keys (fractions). Might change to dictlike.
+        # targets, labels from datamodule, is dictlike with keys of answer_keys, each with values of shape (B)
+
+        if self.careful:
+            # some models give occasional nans for all predictions on a specific galaxy/row
+            # these are inputs to the loss and only happen many epochs in so probably not a case of bad labels, but rather some instability during training
+            # handle this by setting loss=0 for those rows and throwing a warning
+            nan_prediction = torch.isnan(targets) | torch.isinf(targets)
+            if nan_prediction.any():
+                logging.warning(f'Found nan values in targets: {targets}')
+            safety_value = torch.ones(1, device=targets.device, dtype=targets.dtype)  # fill with 1 everywhere i.e. fully uncertain
+            targets = torch.where(condition=nan_prediction, input=safety_value, other=inputs)
+
+        q_losses = []
+
+        # logging.info(targets.keys())  # should be answer_keys (and answer_fraction_keys, but ignored here)
+                
+        for question, answers in self.question_answer_pairs.items():
+
+            q_answer_keys = [question + answer for answer in answers]
+
+            # shape (B, A), where A is the number of answers for this question
+            counts = torch.stack([targets[key] for key in q_answer_keys], dim=1).int() 
+            # work out the answer indices for the prediction vector
+            answer_indices = [self.answer_keys.index(key) for key in q_answer_keys]
+            # shape (B, A) similarly
+            predictions_for_answers = inputs[:, answer_indices]
+            # now these are two vectors and ready for the functional loss
+            
+            question_loss = self.question_functional_loss(predictions_for_answers, counts)  # log-likelihood of q preds, shape (B)
+            q_losses.append(question_loss)
+    
+        total_loss = torch.stack(q_losses, dim=1)  # shape (B, numQ)
+
+        return total_loss  # reduction outside this func
+        # treating all answers equally, take a nanmean across batch (for same loss scale as we change batch size)
+        # total_loss_sum_by_q = torch.nansum(total_loss, dim=1)  # shape (B), sum across q
+        # return torch.nanmean(total_loss_sum_by_q, dim=0)  # scalar
+
+
+if __name__ == "__main__":
+
+    # probs = torch.tensor([[0.1, 0.2, 0.7], [0.3, 0.4, 0.3]], dtype=torch.float32)
+    # counts = torch.tensor([[1, 2, 3], [4, 5, 6]], dtype=torch.int32)
+
+    probs = torch.tensor([0.1, 0.2, 0.7], dtype=torch.float32)
+    counts = torch.tensor([1, 2, 3], dtype=torch.int32)
+    print(get_neg_multinomial_log_prob(probs, counts))
+
+    from zoobot.pytorch.training.losses import get_dirichlet_neg_log_prob
+    
+    concentrations = probs * 10
+    print(get_dirichlet_neg_log_prob(concentrations, counts))

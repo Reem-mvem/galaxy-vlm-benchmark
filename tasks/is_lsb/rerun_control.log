@@ -1,0 +1,47 @@
+Control: 20 false negatives + 20 false positives = 40
+[1/40] e07151f1f2d9 true=tidal     before=not_tidal control=not_tidal  
+[2/40] 3bd84619a73b true=tidal     before=not_tidal control=tidal  FLIP-correct
+[3/40] 87f11321423d true=tidal     before=not_tidal control=not_tidal  
+[4/40] 3d5edb293a66 true=tidal     before=not_tidal control=not_tidal  
+[5/40] 36d2f16fb245 true=tidal     before=not_tidal control=not_tidal  
+[6/40] 47f33ea0f34e true=tidal     before=not_tidal control=not_tidal  
+[7/40] 05969826e86f true=tidal     before=not_tidal control=not_tidal  
+[8/40] 7822afb47126 true=tidal     before=not_tidal control=tidal  FLIP-correct
+[9/40] 95898c199917 true=tidal     before=not_tidal control=tidal  FLIP-correct
+[10/40] 4ef0668bac24 true=tidal     before=not_tidal control=not_tidal  
+[11/40] bf008e1ad321 true=tidal     before=not_tidal control=not_tidal  
+[12/40] d22b4a72ba52 true=tidal     before=not_tidal control=not_tidal  
+[13/40] bcb9c9fe7be2 true=tidal     before=not_tidal control=not_tidal  
+[14/40] 356eadc4e0cc true=tidal     before=not_tidal control=not_tidal  
+[15/40] d8a82d3d635a true=tidal     before=not_tidal control=not_tidal  
+[16/40] 58a23644cb4e true=tidal     before=not_tidal control=not_tidal  
+[17/40] 88f3fb5c02c8 true=tidal     before=not_tidal control=tidal  FLIP-correct
+[18/40] ba42468eeb02 true=tidal     before=not_tidal control=not_tidal  
+[19/40] 1118076f45b9 true=tidal     before=not_tidal control=tidal  FLIP-correct
+[20/40] d05021d6f24d true=tidal     before=not_tidal control=not_tidal  
+[21/40] 7da2fb23833a true=not_tidal before=tidal     control=tidal  
+[22/40] 48748ba7b3f2 true=not_tidal before=tidal     control=not_tidal  FLIP-correct
+[23/40] f8b591139ac1 true=not_tidal before=tidal     control=tidal  
+[24/40] d63956362ef0 true=not_tidal before=tidal     control=not_tidal  FLIP-correct
+[25/40] c1e5e37523dc true=not_tidal before=tidal     control=tidal  
+[26/40] 742e0d76e767 true=not_tidal before=tidal     control=tidal  
+[27/40] ed42dca5f8e5 true=not_tidal before=tidal     control=tidal  
+[28/40] 1f3c32776615 true=not_tidal before=tidal     control=not_tidal  FLIP-correct
+[29/40] ccea90209676 true=not_tidal before=tidal     control=tidal  
+[30/40] ea2e1e9d0e64 true=not_tidal before=tidal     control=tidal  
+[31/40] 14d30de5f70c true=not_tidal before=tidal     control=tidal  
+[32/40] 78e7764edd17 true=not_tidal before=tidal     control=not_tidal  FLIP-correct
+[33/40] 1d4d8e70adfa true=not_tidal before=tidal     control=tidal  
+[34/40] 1b1aefb86040 true=not_tidal before=tidal     control=not_tidal  FLIP-correct
+[35/40] 61ce12fd0279 true=not_tidal before=tidal     control=not_tidal  FLIP-correct
+[36/40] 1611c281bbc2 true=not_tidal before=tidal     control=tidal  
+[37/40] 014c1c8e85c9 true=not_tidal before=tidal     control=tidal  
+[38/40] 87eb1bd96e62 true=not_tidal before=tidal     control=tidal  
+[39/40] 2bb3e9421db8 true=not_tidal before=tidal     control=tidal  
+[40/40] d5acd90fbc4b true=not_tidal before=tidal     control=tidal  
+
+============================================================
+FN (true tidal, was not_tidal): 5/20 flipped correct on plain re-run (25%)
+FP (true not_tidal, was tidal): 6/20 flipped correct on plain re-run (30%)
+OVERALL baseline (nondeterminism): 11/40 (28%)
+Saved -> results\is_lsb_control_rerun.csv

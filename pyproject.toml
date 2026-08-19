@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "galaxy-vlm-benchmark"
+version = "0.1.0"
+description = "How many labeled images does a fine-tuned CNN need to beat a zero-shot vision-language model on galaxy morphology tasks?"
+requires-python = ">=3.10"
+dependencies = [
+    "google-genai",
+    "openai",
+    "requests",
+    "python-dotenv",
+    "pandas",
+    "numpy",
+    "matplotlib",
+    "scikit-learn",
+    "datasets",
+    "pillow",
+]
+
+[project.optional-dependencies]
+extras = [
+    "genai-prices",   # cost estimates for Gemini runs
+    "jupyter",        # analysis/label_efficiency.ipynb
+]
+
+[tool.setuptools]
+packages = ["vlm_eval"]

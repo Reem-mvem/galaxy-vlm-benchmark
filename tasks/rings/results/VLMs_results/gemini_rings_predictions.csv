@@ -1,0 +1,77 @@
+id_str,true_fraction,votes_ring,pred_fraction,rationale,raw_response,parse_failed,img_w,img_h
+test_7531,0.4000000059604645,0,0.0,"The galaxy is a smooth, featureless elliptical galaxy with no visible ring structure.","{
+  ""votes_ring"": 0,
+  ""rationale"": ""The galaxy is a smooth, featureless elliptical galaxy with no visible ring structure.""
+}",False,424,424
+test_15599,0.2000000029802322,0,0.0,"The galaxy appears to be a smooth, featureless elliptical galaxy with no visible ring structure.","{""votes_ring"": 0, ""rationale"": ""The galaxy appears to be a smooth, featureless elliptical galaxy with no visible ring structure.""}",False,424,424
+test_12709,0.0,1,0.1,The galaxy appears to be an irregular merger with asymmetric tidal features rather than a defined ring structure.,"{""votes_ring"": 1, ""rationale"": ""The galaxy appears to be an irregular merger with asymmetric tidal features rather than a defined ring structure.""}",False,424,424
+test_1191,0.2000000029802322,1,0.1,"The galaxy has a bright central core with a faint, slightly asymmetric outer envelope and a small companion, but no distinct ring structure is visible.","{""votes_ring"": 1, ""rationale"": ""The galaxy has a bright central core with a faint, slightly asymmetric outer envelope and a small companion, but no distinct ring structure is visible.""}",False,424,424
+test_16308,0.699999988079071,3,0.3,"The galaxy features a bright central bar surrounded by a diffuse, round outer envelope that some volunteers might interpret as a ring.","{
+  ""votes_ring"": 3,
+  ""rationale"": ""The galaxy features a bright central bar surrounded by a diffuse, round outer envelope that some volunteers might interpret as a ring.""
+}",False,424,424
+test_10066,0.0,0,0.0,The galaxy appears to be a smooth elliptical galaxy with no visible ring structure.,"{""votes_ring"": 0, ""rationale"": ""The galaxy appears to be a smooth elliptical galaxy with no visible ring structure.""}",False,424,424
+test_2874,0.3636363744735718,1,0.1,"The galaxy features a bright central oval with faint, diffuse outer structures that do not form a distinct ring.","{""votes_ring"": 1, ""rationale"": ""The galaxy features a bright central oval with faint, diffuse outer structures that do not form a distinct ring.""}",False,424,424
+test_17122,0.2000000029802322,3,0.3,"There is a faint, diffuse outer halo surrounding the bright core that some volunteers might identify as a ring, though the high noise level makes it highly ambiguous.","{
+  ""votes_ring"": 3,
+  ""rationale"": ""There is a faint, diffuse outer halo surrounding the bright core that some volunteers might identify as a ring, though the high noise level makes it highly ambiguous.""
+}",False,424,424
+test_13219,0.4000000059604645,0,0.0,"The galaxy is a smooth, elongated elliptical or lenticular galaxy with no visible ring structure or dust lanes.","{""votes_ring"": 0, ""rationale"": ""The galaxy is a smooth, elongated elliptical or lenticular galaxy with no visible ring structure or dust lanes.""}",False,424,424
+test_17490,0.8999999761581421,1,0.1,"The galaxy features a bright core with a faint, single tidal tail extending upwards rather than a closed or distinct ring structure.","{
+  ""votes_ring"": 1,
+  ""rationale"": ""The galaxy features a bright core with a faint, single tidal tail extending upwards rather than a closed or distinct ring structure.""
+}",False,424,424
+test_17424,0.0909090936183929,0,0.0,The image shows a pair of interacting galaxies with no visible ring structure.,"{""votes_ring"": 0, ""rationale"": ""The image shows a pair of interacting galaxies with no visible ring structure.""}",False,424,424
+test_5740,0.5384615659713745,3,0.3,"The galaxy features a bright central core surrounded by a faint, diffuse outer oval structure that some volunteers may classify as a ring.","{
+  ""votes_ring"": 3,
+  ""rationale"": ""The galaxy features a bright central core surrounded by a faint, diffuse outer oval structure that some volunteers may classify as a ring.""
+}",False,424,424
+test_15495,0.4000000059604645,0,0.0,"The image shows a smooth elliptical galaxy and an inclined disk galaxy, neither of which exhibits any ring-like features.","{""votes_ring"": 0, ""rationale"": ""The image shows a smooth elliptical galaxy and an inclined disk galaxy, neither of which exhibits any ring-like features.""}",False,424,424
+test_1278,0.2000000029802322,0,0.0,"The galaxy appears to be a smooth, featureless elliptical galaxy with no visible ring structure.","{""votes_ring"": 0, ""rationale"": ""The galaxy appears to be a smooth, featureless elliptical galaxy with no visible ring structure.""}",False,424,424
+test_15032,0.4285714328289032,0,0.0,"The galaxy appears as a smooth, featureless elliptical galaxy with no visible ring structure.","{""votes_ring"": 0, ""rationale"": ""The galaxy appears as a smooth, featureless elliptical galaxy with no visible ring structure.""}",False,424,424
+test_6974,0.1818181872367859,6,0.6,"A faint, circular ring-like structure is visible around the bright central core, though the low resolution makes it somewhat ambiguous.","{
+  ""votes_ring"": 6,
+  ""rationale"": ""A faint, circular ring-like structure is visible around the bright central core, though the low resolution makes it somewhat ambiguous.""
+}",False,424,424
+test_1888,0.800000011920929,2,0.2,"The galaxy has a smooth, elliptical outer envelope or lens, but lacks a distinct, separated ring structure.","{
+  ""votes_ring"": 2,
+  ""rationale"": ""The galaxy has a smooth, elliptical outer envelope or lens, but lacks a distinct, separated ring structure.""
+}",False,424,424
+test_5388,0.3000000119209289,1,0.1,"The galaxy appears as a fuzzy, elliptical disk with a bright core, lacking any distinct circular or elliptical ring structure.","{""votes_ring"": 1, ""rationale"": ""The galaxy appears as a fuzzy, elliptical disk with a bright core, lacking any distinct circular or elliptical ring structure.""}",False,424,424
+test_1008,0.1000000014901161,0,0.0,"The galaxy appears to be a smooth, featureless elliptical galaxy with no visible ring structure.","{""votes_ring"": 0, ""rationale"": ""The galaxy appears to be a smooth, featureless elliptical galaxy with no visible ring structure.""}",False,424,424
+test_15249,0.5,8,0.8,"The galaxy features a prominent, well-defined outer ring structure surrounding a bright central core.","{
+  ""votes_ring"": 8,
+  ""rationale"": ""The galaxy features a prominent, well-defined outer ring structure surrounding a bright central core.""
+}",False,424,424
+test_14566,0.0,0,0.0,"The galaxy appears as a smooth, featureless elongated oval with no visible ring structure.","{""votes_ring"": 0, ""rationale"": ""The galaxy appears as a smooth, featureless elongated oval with no visible ring structure.""}",False,424,424
+test_14823,0.6666666865348816,0,0.0,"The galaxy is a smooth, featureless elliptical galaxy with no visible ring structure.","{""votes_ring"": 0, ""rationale"": ""The galaxy is a smooth, featureless elliptical galaxy with no visible ring structure.""}",False,424,424
+test_6822,0.7692307829856873,0,0.0,The galaxy is highly inclined with a smooth disk and shows no signs of a ring structure.,"{""votes_ring"": 0, ""rationale"": ""The galaxy is highly inclined with a smooth disk and shows no signs of a ring structure.""}",False,424,424
+test_10033,0.4000000059604645,0,0.0,"The main galaxy is a smooth elliptical with separate companion galaxies nearby, showing no stellar or dust ring structure.","{""votes_ring"": 0, ""rationale"": ""The main galaxy is a smooth elliptical with separate companion galaxies nearby, showing no stellar or dust ring structure.""}",False,424,424
+test_5988,0.75,0,0.0,"The galaxy appears to be a smooth, featureless lenticular or elliptical galaxy with no visible ring structure.","{
+  ""votes_ring"": 0,
+  ""rationale"": ""The galaxy appears to be a smooth, featureless lenticular or elliptical galaxy with no visible ring structure.""
+}",False,424,424
+test_16115,0.5,0,0.0,"The galaxy is highly inclined with a bright central bulge and disk, showing no visible ring structure.","{""votes_ring"": 0, ""rationale"": ""The galaxy is highly inclined with a bright central bulge and disk, showing no visible ring structure.""}",False,424,424
+test_418,0.8181818127632141,0,0.0,"The galaxy appears as a smooth, bright elliptical source with no visible ring structure.","{""votes_ring"": 0, ""rationale"": ""The galaxy appears as a smooth, bright elliptical source with no visible ring structure.""}",False,424,424
+test_1244,0.0,0,0.0,"This is a highly inclined, edge-on disk galaxy with no visible ring structure.","{""votes_ring"": 0, ""rationale"": ""This is a highly inclined, edge-on disk galaxy with no visible ring structure.""}",False,424,424
+test_4236,0.4000000059604645,0,0.0,"The galaxy appears to be a smooth, featureless elliptical galaxy with no visible ring structure.","{""votes_ring"": 0, ""rationale"": ""The galaxy appears to be a smooth, featureless elliptical galaxy with no visible ring structure.""}",False,424,424
+test_5118,0.1000000014901161,0,0.0,"The galaxy is a smooth, highly inclined disk with no visible ring structure.","{""votes_ring"": 0, ""rationale"": ""The galaxy is a smooth, highly inclined disk with no visible ring structure.""}",False,424,424
+test_1455,0.8999999761581421,3,0.3,"The galaxy features a bright central core surrounded by a faint, diffuse outer envelope that some volunteers might interpret as a ring.","{
+  ""votes_ring"": 3,
+  ""rationale"": ""The galaxy features a bright central core surrounded by a faint, diffuse outer envelope that some volunteers might interpret as a ring.""
+}",False,424,424
+test_5919,0.800000011920929,0,0.0,"The galaxy is a highly inclined, smooth disk or lenticular galaxy with no visible ring structure.","{""votes_ring"": 0, ""rationale"": ""The galaxy is a highly inclined, smooth disk or lenticular galaxy with no visible ring structure.""}",False,424,424
+test_16537,0.3000000119209289,0,0.0,The galaxy appears to be a smooth elliptical or lenticular galaxy with a diffuse halo but no distinct ring structure.,"{
+  ""votes_ring"": 0,
+  ""rationale"": ""The galaxy appears to be a smooth elliptical or lenticular galaxy with a diffuse halo but no distinct ring structure.""
+}",False,424,424
+test_9656,0.5,7,0.7,The tightly wrapped spiral arms form a prominent pseudo-ring structure around the bright central bar.,"{""votes_ring"": 7, ""rationale"": ""The tightly wrapped spiral arms form a prominent pseudo-ring structure around the bright central bar.""}",False,424,424
+test_7621,0.6000000238418579,0,0.0,The galaxy appears to be a smooth elliptical or lenticular galaxy with no visible ring structure.,"{""votes_ring"": 0, ""rationale"": ""The galaxy appears to be a smooth elliptical or lenticular galaxy with no visible ring structure.""}",False,424,424
+test_8177,0.75,0,0.0,"The galaxy appears to be an elliptical or lenticular galaxy with a bright core and a faint tail, but shows no signs of a ring structure.","{""votes_ring"": 0, ""rationale"": ""The galaxy appears to be an elliptical or lenticular galaxy with a bright core and a faint tail, but shows no signs of a ring structure.""}",False,424,424
+test_12741,0.1000000014901161,0,0.0,"The galaxy is a smooth, featureless elliptical galaxy with no visible ring structure.","{""votes_ring"": 0, ""rationale"": ""The galaxy is a smooth, featureless elliptical galaxy with no visible ring structure.""}",False,424,424
+test_10641,0.4000000059604645,0,0.0,"The galaxy is viewed nearly edge-on and appears as a smooth, bright disk with no visible ring structure.","{""votes_ring"": 0, ""rationale"": ""The galaxy is viewed nearly edge-on and appears as a smooth, bright disk with no visible ring structure.""}",False,424,424
+test_4157,0.2000000029802322,0,0.0,"The galaxy is a smooth, featureless elliptical galaxy with no visible ring structure.","{""votes_ring"": 0, ""rationale"": ""The galaxy is a smooth, featureless elliptical galaxy with no visible ring structure.""}",False,424,424
+test_12053,0.5,0,0.0,"The galaxy is a smooth, featureless elliptical galaxy with no visible ring structure.","{""votes_ring"": 0, ""rationale"": ""The galaxy is a smooth, featureless elliptical galaxy with no visible ring structure.""}",False,424,424
+test_18200,0.699999988079071,0,0.0,"The galaxy appears as a smooth, featureless elliptical galaxy with no visible ring structure.","{""votes_ring"": 0, ""rationale"": ""The galaxy appears as a smooth, featureless elliptical galaxy with no visible ring structure.""}",False,424,424
+test_9207,0.6666666865348816,0,0.0,The galaxy appears to be a smooth elliptical or lenticular galaxy with no visible ring structure.,"{""votes_ring"": 0, ""rationale"": ""The galaxy appears to be a smooth elliptical or lenticular galaxy with no visible ring structure.""}",False,424,424
+test_7940,0.6000000238418579,7,0.7,"The galaxy features a distinct, faint outer ring-like envelope surrounding a bright central core.","{""votes_ring"": 7, ""rationale"": ""The galaxy features a distinct, faint outer ring-like envelope surrounding a bright central core.""}",False,424,424

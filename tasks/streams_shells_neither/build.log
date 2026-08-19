@@ -1,0 +1,7 @@
+loading astronolan/streams_shells_neither ...
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+splits: {'train': 72, 'test': 30} | label: Value('string') | names: None
+columns: ['image_rgb', 'image_stretched', 'image_bands', 'ra', 'dec', 'label']
+train: 72 imgs -> {'stream': np.int64(29), 'shell': np.int64(24), 'neither': np.int64(19)}
+test: 30 imgs -> {'neither': np.int64(10), 'shell': np.int64(10), 'stream': np.int64(10)}
+BUILD_DONE
