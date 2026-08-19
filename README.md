@@ -59,6 +59,7 @@ experiments/
     euclid_tree/     # 13-question schema, path-accuracy scoring, euclid VLM/Gemini runs
     label_efficiency/# encoder label-efficiency curves
     streams_shells/  # real-world DESI task (build + eval)
+    prompt_optimization/       # experimental prompt search for zero-shot APIs
     cost_gpt_qwen_sampler.py   # API cost measurement (GPT + Qwen-397B tokens/cost)
 analysis/            # plotting scripts
 figures/             # generated figures
