@@ -96,10 +96,9 @@ class OpenAIProvider:
 
     label = "OpenAI"
 
-    def __init__(self, model, image_detail="low", max_completion_tokens=500):
+    def __init__(self, model, max_completion_tokens=500):
         from openai import OpenAI
         self.model = model
-        self.image_detail = image_detail
         self.max_completion_tokens = max_completion_tokens
         self.client = OpenAI(api_key=_require_key("OPENAI_API_KEY"))
 
@@ -108,8 +107,7 @@ class OpenAIProvider:
             model=self.model,
             messages=[{"role": "user", "content": [
                 {"type": "image_url",
-                 "image_url": {"url": f"data:image/jpeg;base64,{to_b64(image_bytes)}",
-                               "detail": self.image_detail}},
+                 "image_url": {"url": f"data:image/jpeg;base64,{to_b64(image_bytes)}"}},
                 {"type": "text", "text": prompt},
             ]}],
             max_completion_tokens=self.max_completion_tokens,
@@ -141,7 +139,6 @@ class OpenRouterProvider:
                 {"type": "text", "text": prompt},
             ]}],
             "max_tokens": self.max_tokens,
-            "temperature": 0.0,
             "reasoning": {"enabled": False},
         }
         resp = requests.post(self.API_URL, headers=headers, json=payload, timeout=60)
