@@ -44,23 +44,22 @@ accuracy** — a Gemini thinking-budget sweep *helped* the 3-class real-world ta
 
 ```
 vlm_eval/            # shared eval framework (providers, runner, metrics, catalogs)
-tasks/<task>/        # task.py + data/ (gitignored, from HF) + results/
+tasks/<task>/        # task.py + data/ (test/train ID lists; images not committed) + results/
     results/
       VLMs_results/                    # zero-shot: Gemini, GPT, Qwen-397B, local zero-shot
       Fine-tuning_results_Qwen2VL-7B/  # per-model fine-tune results
       Fine-tuning_results_Qwen3.5-4B/
       Fine-tuning_results_Qwen3.5-9B/
+tasks/euclid/
+    euclid_VLMs/     # zero-shot API runs (Gemini, GPT, Qwen-397B) + shared schema and path scoring
+    fine-tuned/      # local Qwen3.5-4B (zero-shot and fine-tuned) runs
+    encoder_baseline/# encoder path accuracy and label-efficiency curve
 finetuning/
     vlm_lora/        # LoRA trainers (Qwen2-VL-7B and Qwen3.5-VL-4B/9B) + eval runners
+    adapters/        # reported Qwen3.5-4B adapters (configs + logs) and their jobs
     encoders/        # gz-evo clone (specialist encoder baseline) + jobs + per-seed test predictions
-    jobs/            # SLURM sbatch templates
-experiments/
-    reasoning/       # thinking-budget sweeps (rings, streams, which_lsb) + results/
-    euclid_tree/     # 13-question schema, path-accuracy scoring, euclid VLM/Gemini runs
-    label_efficiency/# encoder label-efficiency curves
-    streams_shells/  # real-world DESI task (build + eval)
-    prompt_optimization/       # experimental prompt search for zero-shot APIs
-    cost_gpt_qwen_sampler.py   # API cost measurement (GPT + Qwen-397B tokens/cost)
+experiments/         # side experiments not in the headline results (reasoning sweeps,
+                     # prompt variants, ablations, cost measurement), one folder per topic
 analysis/            # plotting scripts
 figures/             # generated figures
 config.py            # central paths (env-overridable)
@@ -69,13 +68,13 @@ docs/                # methodology, running-on-hpc, results
 
 ## Data & weights
 
-- **Datasets are not committed** (see `.gitignore`) — they are pulled from HuggingFace by
-  the `experiments/*/build*` scripts (`mwalmsley/gz_rings`, `mwalmsley/gz_euclid`,
-  `astronolan/streams_shells_neither`, plus the Galaxy Zoo / Euclid catalogs).
-- **LoRA adapters are not committed** — they retrain in ~15 min from `finetuning/vlm_lora/`
-  (recipe in `finetuning/vlm_lora/RECIPE.md`).
-- **Per-seed CNN test predictions ARE committed** under `finetuning/cnn/results/` so every
-  reported test number is verifiable; the large train/validation predictions are omitted.
+- **Images are not committed**; they come from HuggingFace (`mwalmsley/gz_rings`,
+  `mwalmsley/gz_euclid`, `astronolan/streams_shells_neither`, plus the Galaxy Zoo / Euclid
+  catalogs). The exact test and training IDs used are committed in `tasks/<task>/data/`.
+- **LoRA adapter weights are not committed**; their configs, jobs and training/eval logs are
+  in `finetuning/adapters/`. Recipe in `finetuning/vlm_lora/RECIPE.md`.
+- **Per-seed encoder test predictions are committed** under `finetuning/encoders/results/` so
+  every reported test number is verifiable; the large train/validation predictions are omitted.
 
 ## Install
 
@@ -100,6 +99,7 @@ HPC (Narval/SLURM) specifics are in `docs/running-on-hpc.md`.
 ## Attribution
 
 The specialist encoder baseline uses **gz-evo / Zoobot** (Mike Walmsley et al.) — vendored under
-`finetuning/encoders/gz-evo/` with its original `LICENSE`; upstream: https://github.com/mwalmsley/zoobot.
+`finetuning/encoders/gz-evo/` with its original `LICENSE`; upstream: https://github.com/mwalmsley/gz-evo
+(commit `8a0bdca`). Our changes are listed in `finetuning/encoders/README.md`.
 The `streams_shells_neither` task uses the mentor-provided DESI dataset published at
 `astronolan/streams_shells_neither`.

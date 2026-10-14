@@ -13,7 +13,7 @@ from pathlib import Path
 import pandas as pd
 from datasets import load_dataset
 
-R = Path("/home/reem1/scratch/galaxy-vlm-benchmark/tasks/rings")
+R = Path(__file__).resolve().parent
 HF, CONFIG = "mwalmsley/gz_rings", "classification"
 TRAIN_IMG = R / "data" / "images" / "train"
 TRAIN_IMG.mkdir(parents=True, exist_ok=True)

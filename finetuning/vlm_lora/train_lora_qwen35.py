@@ -72,6 +72,8 @@ def build_collate_fn(processor, image_token_id):
     return collate
 
 
+# Optional class-weighted loss for imbalanced training data (POS_WEIGHT > 1 up-weights "yes"
+# examples). Unused in the reported runs: their training sets are balanced (POS_WEIGHT = 1.0).
 def make_weighted_trainer_cls():
     import torch
     import torch.nn as nn

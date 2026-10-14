@@ -32,5 +32,5 @@ Ablation: the 4B was re-run at `r = 16` on rings + strong_lens (`LORA_R=16`).
 
 ## Run
 Set `TRAIN_SAMPLE_CSV`, `ADAPTER_OUT`, `TASK_PROMPT`, `MODEL_LOCAL_PATH` (+ `ANSWER_YES_LABEL`
-for binary tasks), then `python train_lora_qwen35.py`. Example jobs in `../jobs/`. Adapters
+for binary tasks), then `python train_lora_qwen35.py`. Example jobs in `../adapters/jobs/`. Adapters
 (~78 MB) are not committed — retrain in ~15 min on one GPU.

@@ -20,8 +20,8 @@ export HF_HOME=/scratch/reem1/rings_runs/hf_cache
 export HF_HUB_CACHE=$HF_HOME/hub HF_DATASETS_CACHE=$HF_HOME/datasets
 export HF_HUB_OFFLINE=1 HF_DATASETS_OFFLINE=1 WANDB_MODE=offline
 case "$TASK" in
-  is_lsb)    DS=is-lsb;    CSV=/home/reem1/scratch/galaxy-vlm-benchmark/tasks/is_lsb/data/train_100.csv ;;
-  which_lsb) DS=which-lsb; CSV=/home/reem1/scratch/galaxy-vlm-benchmark/tasks/which_lsb/data/train_100_realids.csv ;;
+  is_lsb)    DS=is-lsb;    CSV=/home/reem1/scratch/galaxy-vlm-benchmark-2/tasks/is_lsb/data/train_100.csv ;;
+  which_lsb) DS=which-lsb; CSV=/home/reem1/scratch/galaxy-vlm-benchmark-2/tasks/which_lsb/data/train_100_cnn.csv ;;
 esac
 export GZEVO_TRAIN_CSV=$CSV
 REPO_DIR=/scratch/reem1/rings_runs/gz-evo

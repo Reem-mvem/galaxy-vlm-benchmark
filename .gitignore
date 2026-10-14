@@ -4,7 +4,7 @@
 !.env.example
 
 # downloaded data (rebuilt by eval_*.py --build_catalog_only)
-tasks/*/data/
+tasks/*/data/images/
 prompt_optimization/*/images/
 
 # CNN prediction bundles from the lab server (too large / external)
@@ -16,7 +16,6 @@ unsorted/
 reported.md
 
 # large model artifacts kept off-git (retrain from finetuning/ + recipe)
-adapters/
 *.tar
 *.ckpt
 *.pt
@@ -33,3 +32,14 @@ __pycache__/
 *.pyc
 *.egg-info/
 .ipynb_checkpoints/
+
+CODE_FIXES.md
+
+# LoRA adapters: track configs, jobs, logs and READMEs; keep the large weight files out
+# (weights are published on the HuggingFace Hub)
+finetuning/adapters/**/adapter_model.safetensors
+finetuning/adapters/**/tokenizer.json
+finetuning/adapters/**/training_args.bin
+
+# Qwen2-VL-7B job files: kept locally, not published for now
+finetuning/jobs/
