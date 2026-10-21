@@ -1,12 +1,12 @@
 """LoRA fine-tune Qwen3.5-4B (vision-language, dense) on one galaxy task (bf16, no
 quantization). Adapted from the Qwen2-VL trainer — ONLY the model/processor classes
 and the image-token source changed (AutoModelForImageTextToText + AutoProcessor,
-image_token_id read from config = 248056). Everything else (env-driven interface,
-collator, LoRA, weighted trainer) is identical, so it slots into the same pipeline.
+image_token_id read from config = 248056). The loss is computed on the answer only
+(prompt, assistant header, image and padding tokens are masked).
 
 Required env: TRAIN_SAMPLE_CSV, ADAPTER_OUT, TASK_PROMPT, [ANSWER_YES_LABEL]
 Optional: IMAGES_DIR, TARGET_MODULES(all-linear), EPOCHS, BATCH_SIZE, GRAD_ACCUM,
-          POS_WEIGHT, LORA_R, MODEL_LOCAL_PATH
+          LORA_R, MODEL_LOCAL_PATH
 """
 import os
 import argparse
@@ -23,7 +23,6 @@ EPOCHS = float(os.environ.get("EPOCHS", "4"))
 BATCH_SIZE = int(os.environ.get("BATCH_SIZE", "4"))
 GRAD_ACCUM = int(os.environ.get("GRAD_ACCUM", "4"))
 LORA_R = int(os.environ.get("LORA_R", "8"))              # rank (bump to push capacity)
-POS_WEIGHT = float(os.environ.get("POS_WEIGHT", "1.0"))
 
 PROMPT = os.environ["TASK_PROMPT"]
 ANSWER_YES_LABEL = os.environ.get("ANSWER_YES_LABEL")
@@ -45,6 +44,10 @@ def load_examples():
 
 def build_collate_fn(processor, image_token_id):
     pad_id = processor.tokenizer.pad_token_id
+    start_id = processor.tokenizer.convert_tokens_to_ids("<|im_start|>")
+    # fixed assistant header the eval prompt also supplies; masked so only the answer is graded
+    header_len = len(processor.tokenizer("<|im_start|>assistant\n<think>\n\n</think>\n\n",
+                                         add_special_tokens=False)["input_ids"])
 
     def collate(examples):
         texts, images = [], []
@@ -62,41 +65,14 @@ def build_collate_fn(processor, image_token_id):
         labels = batch["input_ids"].clone()
         labels[labels == pad_id] = -100              # don't train on padding
         labels[labels == image_token_id] = -100      # don't train on image placeholder tokens
+        for i, ids in enumerate(batch["input_ids"]):  # don't train on the prompt or assistant header
+            starts = (ids == start_id).nonzero(as_tuple=True)[0]
+            assert len(starts) == 2, f"expected user + assistant turns, got {len(starts)}"
+            labels[i, :starts[-1] + header_len] = -100
         batch["labels"] = labels
-        if POS_WEIGHT != 1.0:
-            import torch as _t
-            batch["class_weights"] = _t.tensor(
-                [POS_WEIGHT if ex["answer"] == "yes" else 1.0 for ex in examples])
         return batch
 
     return collate
-
-
-# Optional class-weighted loss for imbalanced training data (POS_WEIGHT > 1 up-weights "yes"
-# examples). Unused in the reported runs: their training sets are balanced (POS_WEIGHT = 1.0).
-def make_weighted_trainer_cls():
-    import torch
-    import torch.nn as nn
-    from trl import SFTTrainer
-
-    class WeightedSFTTrainer(SFTTrainer):
-        def compute_loss(self, model, inputs, return_outputs=False, **kwargs):
-            weights = inputs.pop("class_weights")
-            labels = inputs.pop("labels")
-            outputs = model(**inputs)
-            logits = outputs.logits
-            shift_logits = logits[:, :-1, :].contiguous()
-            shift_labels = labels[:, 1:].contiguous()
-            ce = nn.CrossEntropyLoss(reduction="none", ignore_index=-100)
-            tok = ce(shift_logits.view(-1, shift_logits.size(-1)),
-                     shift_labels.view(-1)).view(shift_labels.shape)
-            mask = (shift_labels != -100).float()
-            ex_loss = (tok * mask).sum(1) / mask.sum(1).clamp(min=1)
-            w = weights.to(ex_loss.device).float()
-            loss = (ex_loss * w).sum() / w.sum()
-            return (loss, outputs) if return_outputs else loss
-
-    return WeightedSFTTrainer
 
 
 def main(dryrun):
@@ -126,6 +102,11 @@ def main(dryrun):
     b = collate(exs[:2])
     print(f"collate OK: keys={list(b.keys())} input_ids={tuple(b['input_ids'].shape)} "
           f"labels={tuple(b['labels'].shape)} supervised_tokens={(b['labels'] != -100).sum().item()}")
+    print(f"pad token = {processor.tokenizer.pad_token!r}")
+    for i, ex in enumerate(exs[:2]):
+        graded = processor.tokenizer.decode(b["labels"][i][b["labels"][i] != -100])
+        print(f"graded tokens, example {i}: {graded!r}")
+        assert graded.strip() == ex["answer"] + "<|im_end|>", "answer-only mask is off"
 
     print(f"target_modules = {TARGET_MODULES}")
     peft_config = LoraConfig(
@@ -155,9 +136,7 @@ def main(dryrun):
     model.config.use_cache = False
     print("model class:", type(model).__name__)
 
-    TrainerCls = make_weighted_trainer_cls() if POS_WEIGHT != 1.0 else SFTTrainer
-    print(f"POS_WEIGHT = {POS_WEIGHT} -> {TrainerCls.__name__}")
-    trainer = TrainerCls(
+    trainer = SFTTrainer(
         model=model, args=args, train_dataset=ds,
         data_collator=collate, peft_config=peft_config, processing_class=processor)
 
